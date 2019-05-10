@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<context id="context1">
+
+		
+		<!-- 自动序列化 -->
+  		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+  		
+  		<!-- 自动toString -->
+  		<plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+		
+		<commentGenerator>
+			<!-- 指定生成的java文件的编码,没有直接生成到项目时中文可能会乱码 -->
+	        <property name="javaFileEncoding" value="UTF-8"/>
+	        
+  			<property name="suppressAllComments" value="true" />
+  			
+  			<!-- 解决逆向工程中属性名与表的字段不一致的问题 -->
+			<property name="useActualColumnNames" value="true"/>
+		</commentGenerator>
+
+		<!-- 数据连接的信息 -->
+		<jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+			connectionURL="jdbc:mysql://127.0.0.1:3306/demo?characterEncoding=utf-8"
+			userId="root" password="root" />
+		<!-- 生成实体类 -->
+		<javaModelGenerator targetPackage="com.entity"
+			targetProject="E:\javaProject\pratice_project\springBootGenerator\src\main\java"></javaModelGenerator>
+		<!-- 生成sql映射文件 -->
+		<sqlMapGenerator targetPackage="com.mapper"
+			targetProject="E:\javaProject\pratice_project\springBootGenerator\src\main\resources"></sqlMapGenerator>
+		<!-- 生成mapper接口 -->
+		<javaClientGenerator targetPackage="mapper"
+			targetProject="E:\javaProject\pratice_project\springBootGenerator\src\main\java" type="XMLMAPPER" />
+		<!-- 根据url中指向的库中的某个或多个数据表，而决定以上生成的对象 -->
+		
+		<!-- tableName="%" 可以生成所有      并且可以模糊 -->
+		<table tableName="%">
+			
+		</table>
+	</context>
+</generatorConfiguration>
