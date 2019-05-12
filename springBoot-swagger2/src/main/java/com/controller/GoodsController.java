@@ -28,7 +28,7 @@ public class GoodsController {
 	
 	@PostMapping("/add")
 	@ApiOperation(value = "商品增加",notes="增加商品信息")
-	//@ApiImplicitParams
+	//@ApiImplicitParam(name="goods",value="商品信息",paramType = "body", required = true)
     public String add(@RequestBody Goods goods) {
         return goods.toString();
     }
