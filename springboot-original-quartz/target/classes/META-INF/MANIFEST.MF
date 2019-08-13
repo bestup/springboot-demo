@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: springboot-original-quartz
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: lenovo
+Implementation-Vendor-Id: com.demo
+Build-Jdk: 1.8.0_172
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/springboot-original-quartz
+Created-By: Maven Integration for Eclipse
+
