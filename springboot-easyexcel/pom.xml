@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.8.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.excel</groupId>
+	<artifactId>springboot-easyexcel</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>springboot-easyexcel</name>
+	<description>Demo project for Spring Boot</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<!-- 连接mysql -->
+		<druid.version>1.1.18</druid.version>
+		<!-- mybatisPlus与springboot整合 -->
+		<mybatis-plus-boot-starter.version>3.2.0</mybatis-plus-boot-starter.version>
+		<mybatis-plus-generator.version>3.2.0</mybatis-plus-generator.version>
+		<velocity-engine-core.version>2.1</velocity-engine-core.version>
+		<!--modelMapper工具类-->
+		<modelmapper.version>2.3.5</modelmapper.version>
+		<!--apache工具类-->
+		<commons-lang3.version>3.4</commons-lang3.version>
+		<commons-io.version>2.6</commons-io.version>
+		<commons-codec.version>1.10</commons-codec.version>
+		<commons-net.version>3.6</commons-net.version>
+		<httpclient.version>4.5.2</httpclient.version>
+		<!--fastJson工具类-->
+		<fastjson.version>1.2.47</fastjson.version>
+		<!--pagehelper-->
+		<pagehelper.version>5.1.6</pagehelper.version>
+		<!--JsonWwbeToken -->
+		<jjwt.version>0.9.0</jjwt.version>
+		<!--shiro-spring-->
+		<shiro-spring.version>1.4.0</shiro-spring.version>
+		<!--lombok插件-->
+		<lombok.version>1.18.10</lombok.version>
+		<!--thumbnailator-->
+		<thumbnailator.version>0.4.8</thumbnailator.version>
+		<!--hutool-all 工具-->
+		<hutool-all.version>4.3.1</hutool-all.version>
+		<!--谷歌网络请求重试插件guava-retrying-->
+		<guava-retrying.version>2.0.0</guava-retrying.version>
+		<!--org.jsoup 解析html数据-->
+		<jsoup.version>1.8.3</jsoup.version>
+		<!--配置swagger2-->
+		<springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+		<springfox-swagger-ui.version>2.9.2</springfox-swagger-ui.version>
+
+		<!--caffeine缓存工具-->
+		<caffeine.version>2.6.2</caffeine.version>
+
+		<!--springboot版本-->
+		<boot.version>2.1.8.RELEASE</boot.version>
+
+		<spring.version>5.1.5.RELEASE</spring.version>
+		<easyexcel.version>2.1.4</easyexcel.version>
+
+
+	</properties>
+
+	<dependencies>
+		<!--web容器-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- 阿里导出工具 easyexcel -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>easyexcel</artifactId>
+			<version>${easyexcel.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
