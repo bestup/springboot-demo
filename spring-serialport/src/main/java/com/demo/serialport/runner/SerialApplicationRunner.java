@@ -1,4 +1,4 @@
-package com.demo.serialport.config;
+package com.demo.serialport.runner;
 
 import com.demo.serialport.serial.SerialPortComOne;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import javax.annotation.PreDestroy;
  * @author halo.l
  * @date 2020/8/4
  */
-@Configuration
+//@Configuration
 public class SerialApplicationRunner implements ApplicationRunner {
 
     @Autowired
