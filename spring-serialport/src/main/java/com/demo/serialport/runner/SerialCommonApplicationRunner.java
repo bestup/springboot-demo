@@ -1,6 +1,7 @@
 package com.demo.serialport.runner;
 
 import com.demo.serialport.entity.SerialPortCommon;
+import com.demo.serialport.serial.SerialPortComOne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.PreDestroy;
 
 @Configuration
 public class SerialCommonApplicationRunner implements ApplicationRunner {
@@ -40,5 +43,17 @@ public class SerialCommonApplicationRunner implements ApplicationRunner {
         autowireCapableBeanFactory.autowireBean(serialPortCommon2);
         serialPortCommon1.init();
         serialPortCommon2.init();
+    }
+
+    /**
+     * 销毁方法，在开发阶段，项目重启时将会关闭容器，同时也要关闭串口，否则再次启动时会报串口繁忙
+     * @throws Exception
+     */
+    @PreDestroy
+    public void destroy() throws Exception {
+        SerialPortCommon serialPortCommon1 = (SerialPortCommon)defaultListableBeanFactory.getBean("serialPortCommon1");
+        SerialPortCommon serialPortCommon2 = (SerialPortCommon)defaultListableBeanFactory.getBean("serialPortCommon2");
+        serialPortCommon1.close();
+        serialPortCommon2.close();
     }
 }
