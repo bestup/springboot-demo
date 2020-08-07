@@ -46,6 +46,7 @@ public class SerialPortCommon {
     public void init() throws SerialPortException {
         if(null == serialService) {
             serialService = SpringUtils.getBean("serialService", SerialService.class);
+            System.out.println("执行注入serialService");
         }
 
         serialPort = new SerialPort(portName);
