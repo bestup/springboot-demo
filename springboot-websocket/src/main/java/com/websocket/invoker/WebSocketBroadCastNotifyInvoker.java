@@ -1,6 +1,7 @@
 package com.websocket.invoker;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.*;
@@ -65,7 +66,14 @@ public class WebSocketBroadCastNotifyInvoker {
      * 发送自定义消息
      * */
     public void broadCast(String message) throws IOException {
+        if(StringUtils.isBlank(message)) {
+            return;
+        }
         for (WebSocketBroadCastNotifyInvoker server : servers) {
+            if(!server.session.isOpen()) {
+                servers.remove(server);
+                continue;
+            }
             server.sendMessage(message);
         }
     }
