@@ -1,5 +1,7 @@
 package com.tool.main;
 
+import com.tool.entity.ProvincePlatform;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -42,9 +44,9 @@ public class GeneratorSqlMain {
     }
 
     public static void main(String[] args) {
-        Demo demo = new Demo();
-        GeneratorSqlMain.insertMapper(demo);
-        //GeneratorSqlMain.updateMapper(demo, null);
+        ProvincePlatform demo = new ProvincePlatform();
+        //GeneratorSqlMain.insertMapper(demo);
+        GeneratorSqlMain.updateMapper(demo, null);
         //GeneratorSqlMain.selectMapper(demo);
         //GeneratorSqlMain.sqlMapper(demo, true);
     }
@@ -348,8 +350,8 @@ public class GeneratorSqlMain {
                                 }else {
                                     sql.append("\t" + "<if test=\"" + list.get(i).get("name") + " != null\">");
                                 }
-                                sql.append("\t\t" + list.get(i).get("jdbcname") + "=#{" + list.get(i).get("name") + "},");
-                                sql.append("\t" + "</if>");
+                                sql.append(" " + list.get(i).get("jdbcname") + "=#{" + list.get(i).get("name") + "},");
+                                sql.append(" </if>");
                                 sql.append("\r\n");
                             } else {
                                 if(isBank) {
