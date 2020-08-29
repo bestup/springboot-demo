@@ -1,15 +1,12 @@
-package org.example.demo2;
+package com.demo.serialport.serial;
 
-
+import com.demo.serialport.config.WaitNotifyAll;
 import jssc.SerialPort;
 import jssc.SerialPortEvent;
 import jssc.SerialPortEventListener;
 import jssc.SerialPortException;
 import lombok.Data;
 import lombok.SneakyThrows;
-import org.example.demo2.config.WaitNotifyAll;
-import org.example.demo2.entity.SerialPortCommon;
-import org.example.utils.SpringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.UnsupportedEncodingException;
@@ -19,15 +16,10 @@ import java.io.UnsupportedEncodingException;
  * @date 2020/8/4
  */
 @Data
-public class SerialPortComOne {
+public class SerialPortComTwo {
 
     @Autowired
     private WaitNotifyAll waitNotifyAll;
-
-    /**
-     * 请求我发送指令获取状态信息的串口bean的名称
-     */
-    private String beanName;
 
     /**
      * 串口号
@@ -73,9 +65,19 @@ public class SerialPortComOne {
                             e.printStackTrace();
                         }
                         String data = new String(bytes, "GBK");
-                        //SerialPortCommon serialPortCommon = (SerialPortCommon)SpringUtils.getBean(beanName);
-                        //serialPortCommon.notifyContinue(data);
                         waitNotifyAll.notifyContinue(data);
+
+                        /*if(null != bytes && bytes.length > 0) {
+                            String data = null;
+                            try {
+                                data = new String(bytes, "GBK");
+                            } catch (UnsupportedEncodingException e) {
+                                e.printStackTrace();
+                            }
+                            System.out.println(data);
+                        }else {
+                            System.out.println("无数据");
+                        }*/
                         break;
                     default:
                         break;
@@ -85,15 +87,7 @@ public class SerialPortComOne {
         serialPort.setParams(baudRate, dataBits, stopBits, parity);
     }
 
-    /**
-     * 发送数据
-     * @param beanName 是哪个串口请求我发送指令获取状态信息
-     * @param sendStr 发送的指令
-     * @throws UnsupportedEncodingException
-     * @throws SerialPortException
-     */
-    public void send(String beanName, String sendStr) throws UnsupportedEncodingException, SerialPortException {
-        this.beanName = beanName;
+    public void send(String sendStr) throws UnsupportedEncodingException, SerialPortException {
         serialPort.writeString(sendStr,"GBK");
     }
 

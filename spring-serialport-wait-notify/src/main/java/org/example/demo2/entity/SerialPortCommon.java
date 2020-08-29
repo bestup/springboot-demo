@@ -7,6 +7,7 @@ import jssc.SerialPortException;
 import lombok.Data;
 import lombok.SneakyThrows;
 import org.example.demo2.SerialPortComOne;
+import org.example.demo2.config.WaitNotifyAll;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.UnsupportedEncodingException;
@@ -16,6 +17,9 @@ public class SerialPortCommon {
 
     @Autowired
     private SerialPortComOne serialPortComOne;
+
+    @Autowired
+    private WaitNotifyAll waitNotifyAll;
 
     /**
      * 当前串口在spring容器中bean的名称
@@ -77,7 +81,9 @@ public class SerialPortCommon {
                         }
                         serialPortComOne.send(beanName,"我是扫码器，" + beanName + "，我需要两对光栅的状态数据");
                         System.out.println("线程" + Thread.currentThread().getName() + "等待中");
-                        waitResult();
+                        //waitResult();
+                        waitNotifyAll.waitResult();
+                        data = waitNotifyAll.getData();
                         System.out.println("线程" + Thread.currentThread().getName() + "被唤醒，继续执行");
                         if(null != bytes && bytes.length > 0) {
                             String result = null;
