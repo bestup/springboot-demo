@@ -1,6 +1,7 @@
 package com.tool.main;
 
-import com.tool.entity.ProvincePlatform;
+
+import com.tool.entity.ProvincePlatformFlow;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -44,8 +45,8 @@ public class GeneratorSqlMain {
     }
 
     public static void main(String[] args) {
-        ProvincePlatform demo = new ProvincePlatform();
-        //GeneratorSqlMain.insertMapper(demo);
+        Demo demo = new Demo();
+//        GeneratorSqlMain.insertMapper(demo);
         GeneratorSqlMain.updateMapper(demo, null);
         //GeneratorSqlMain.selectMapper(demo);
         //GeneratorSqlMain.sqlMapper(demo, true);
@@ -477,6 +478,8 @@ public class GeneratorSqlMain {
                     return "jdbcType=REAL";
                 } else if ("double".equals(type)) {
                     return "jdbcType=DOUBLE";
+                } else if ("Double".equals(type)) {
+                    return "jdbcType=DOUBLE";
                 } else if ("Time".equals(type)) {
                     return "jdbcType=TIME";
                 } else if ("Timestamp".equals(type)) {
@@ -497,7 +500,7 @@ public class GeneratorSqlMain {
                 2, jdbcType指定为”JdbcType.DATE”，则只返回日期，不带时分秒
                 3, jdbcType指定为”JdbcType.TIME”，则只有时分秒有效！
                 上述情况，还与数据库有关系，现测试到sybase如果传入new Date(), 那么保存的只有日期，没有具体时间，所以日期暂时不指定jdbcType
-                对于Ibatis操作Date/Time/DateTime，总结如下：
+                对于Ibatis操作Date/Time/Date，总结如下：
                     将pojo的属性类型设置为java.sql.Date（或java.sql.Time, java.sql.Timestamp），此时会严格遵循这三种类型的语义。但此方法因存在前文中提到的性能问题，在JDK1.6以前的JDK版本中能少使用就少使用。
                     如果你想在pojo中使用java.util.Date， 则要注意：
                     完整的日期时间，要确保jdbcType为空，或为DATE,TIME以外的值
