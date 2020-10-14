@@ -26,6 +26,8 @@ public class WebSocketBroadCastNotifyInvoker {
 
     /**concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。*/
     private static Collection<WebSocketBroadCastNotifyInvoker> servers = Collections.synchronizedCollection(new ArrayList<>());
+	//或者用这个
+	//private static CopyOnWriteArraySet<WebSocketBroadCastNotifyInvoker> qrCodeWebSocketServers = new CopyOnWriteArraySet<WebSocketBroadCastNotifyInvoker>();
 
     /**
      * 连接建立成功调用的方法
