@@ -18,7 +18,7 @@ public class GlobalExceptionHandler {
         List<ObjectError> allErrors = e.getBindingResult().getAllErrors();
         for (int i = 0; i < allErrors.size(); i++) {
             b.append(allErrors.get(i).getDefaultMessage()).append(";");
-            break;
+            //break;
         }
         Map<String, Object> map = new HashMap<>();
         map.put("msg", b.toString());
