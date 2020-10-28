@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <title>列表</title>
+    <script src="/index/index.js"></script>
+    <script src="/index/getUrlParam.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- 引入样式文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.10/lib/index.css"/>
+    <!-- 引入 Vue 和 Vant 的 JS 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vant@2.10/lib/vant.min.js"></script>
+    <!-- vconsole -->
+    <script type="text/javascript" src="https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js"></script>
+    <script>
+        var vConsole = new VConsole()
+        console.log('Hello world');
+    </script>
+
+    <style type="text/css">
+        /*下面这行可以解决页面出现数据空白是显示模板的问题*/
+        [v-cloak] {
+            display: none !important;
+        }
+        .nav-title {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: #ffffff;
+        }
+        .content-list{
+            padding-top: 100px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="nav-title">
+        <!--导航条-->
+        <div>
+            <van-nav-bar title="首页" />
+        </div>
+        <!--搜索框-->
+        <div>
+            <van-search v-model="nickname" placeholder="请输入名称" @search="onSearch" />
+        </div>
+    </div>
+
+    <!--数据列表-->
+    <div class="content-list">
+       <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+            <van-list v-model="loading" :offset="offset" :finished="finished" finished-text="没有更多了" @load="onLoad" >
+                <div v-for="item in list" :key="item">
+                    <p>
+                        <span>{{item.id}}</span> -
+                        <span>{{item.nickname}}</span> -
+                        <span>{{item.createTime}}</span>
+                    </p>
+                </div>
+            </van-list>
+        </van-pull-refresh>
+    </div>
+
+</div>
+</body>
+<script>
+    Vue.use(vant.Toast);
+    Vue.use(vant.NavBar);
+    Vue.use(vant.Dialog);
+    Vue.use(vant.Search);
+    Vue.use(vant.PullRefresh);
+    Vue.use(vant.List);
+    //用于从链接路径中获取属性
+    Vue.use(UrlParm);
+    var app = new Vue({
+        el: '#app',
+        data: {
+            nickname: '',
+            list: [],
+            offset: 50,
+            refreshing: false,
+            loading: false,
+            finished: false,
+            pageNum: 1,
+            pageSize: 30
+        },
+        created(){
+            var that = this;
+            var nickname = UrlParm.parm("nickname");
+            if('undefined' != typeof(nickname)) {
+                that.nickname = nickname;
+            }
+        },
+        methods: {
+            onLoad(){
+                var that = this;
+                setTimeout(() => {
+                    if (that.refreshing) {
+                        that.list = [];
+                        that.refreshing = false;
+                    }
+                    that.loading = true;
+                    var pageNum = that.pageNum++;
+                    axios({
+                        method: 'get',
+                        url: API() + '/test/findByPage?pageNum=' + pageNum + '&pageSize=' + that.pageSize + '&nickname='+ that.nickname
+                    }).then(function (resp) {
+                        console.dir(resp)
+                        var res = resp.data;
+                        if(0 == res.code) {
+                            that.list = that.list.concat(res.data.list);
+                            that.loading = false;
+                            //没有下一页，就置为完成
+                            if(!res.data.hasNextPage) {
+                                that.finished = true;
+                            }
+                        }else if(1 == res.code) {
+                            that.$toast('查询失败');
+                        }
+                    });
+                }, 1000);
+            },
+            onRefresh(){
+                this.pageNum = 1;
+                this.finished = false;
+                // 重新加载数据，将 loading 设置为 true，表示处于加载状态
+                this.loading = true;
+                this.onLoad();
+            },
+            onClickLeft(){
+                this.$toast("返回");
+            },
+            onSearch(val) {
+                this.nickname = val;
+                this.refreshing = true;
+                this.onRefresh()
+            }
+        }
+    });
+
+</script>
+
+</html>
