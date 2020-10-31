@@ -1,11 +1,12 @@
 package com.tool.main;
 
 
-import com.tool.entity.ProvincePlatformFlow;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -46,8 +47,8 @@ public class GeneratorSqlMain {
 
     public static void main(String[] args) {
         Demo demo = new Demo();
-//        GeneratorSqlMain.insertMapper(demo);
-        GeneratorSqlMain.updateMapper(demo, null);
+        GeneratorSqlMain.insertMapper(demo);
+        //GeneratorSqlMain.updateMapper(demo, null);
         //GeneratorSqlMain.selectMapper(demo);
         //GeneratorSqlMain.sqlMapper(demo, true);
     }
@@ -507,11 +508,11 @@ public class GeneratorSqlMain {
                     只需要时间，要指定jdbcType=”TIME”
                     只需要日期，要指定jdbcType=”DATE”
                 */
-                } else if ("Date".equals(type)) {
-                    return "error=1";
-                } else if ("LocalDateTime".equals(type)) {
+                }else if ("Date".equals(type)) {
                     return "error=1";
                 }else if ("Integer".equals(type)) {
+                    return "error=1";
+                } else if ("Float".equals(type)) {
                     return "error=1";
                 } else {
                     return "jdbcType=暂无对应数据";
