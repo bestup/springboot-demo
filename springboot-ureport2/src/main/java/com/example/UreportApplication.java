@@ -3,6 +3,7 @@ package com.example;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  * 配置的最后一步就是让我们的项目加载UReport2的Spring配置文件ureport-console-context.xml，
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.ImportResource;
  */
 
 @ImportResource("classpath:ureport-console-context.xml")
+//@PropertySource(value = "classpath:ureport.properties", encoding = "utf8")
 @SpringBootApplication
 public class UreportApplication {
 

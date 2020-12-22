@@ -3,26 +3,25 @@ package com.example.config;
 import com.bstek.ureport.definition.datasource.BuildinDatasource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@Configuration
-@EnableAutoConfiguration
+@Component
 public class UreportDataSourceConfig implements BuildinDatasource {
 
     private Logger log = LoggerFactory.getLogger(getClass());
 
-    @Resource
+    @Autowired
     private DataSource dataSource;
 
     @Override
     public String name() {
-        return "system";
+        return "内置数据源";
     }
 
     @Override

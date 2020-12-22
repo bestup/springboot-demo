@@ -1,2 +1,25 @@
 server:
   port: 8501
+# 数据源配置
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false&zeroDateTimeBehavior=CONVERT_TO_NULL&allowMultiQueries=true&serverTimezone=Asia%2fShanghai
+    username: root
+    password: root
+    maxActive: 200
+    minIdle: 20
+    initialSize: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    testOnBorrow: false
+    testWhileIdle: true
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    mapUnderscoreToCamelCase: true
+
+# mybatis mapper 文件的位置
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
