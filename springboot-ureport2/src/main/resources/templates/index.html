@@ -1,0 +1,43 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript" th:src="@{/vendor/jquery.min.js}" charset="UTF-8"></script>
+<body>
+
+<a href="/index/udesigner">报表模板设计</a>
+
+<!-- 通过一个HTML链接来导出目标报表模版的PDF格式报表 -->
+<a href="/ureport/pdf?_u=mysql:测试1.ureport.xml">导出PDF格式报表</a>
+
+<a href="/ureport/excel?_u=mysql:测试1.ureport.xml">导出EXCEL格式报表</a>
+
+<a href="/ureport/word?_u=mysql:测试1.ureport.xml">导出WORD格式报表</a>
+
+<h3>测试</h3>
+
+<script>
+    $(function() {
+        //请求保表页面的html
+        getUreportHtml();
+    });
+
+    function getUreportHtml() {
+        $.ajax({
+            type: "get",
+            url: '/index/htmlReport',
+            //dataType: "json",
+            success: function(response) {
+                console.log("返回了");
+                $("h3").after(response);
+            },
+            error: function() {
+                console.log("出错了");
+            }
+        });
+    }
+</script>
+</body>
+</html>

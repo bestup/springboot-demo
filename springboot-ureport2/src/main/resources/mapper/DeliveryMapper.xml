@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.DeliveryMapper">
+
+    <resultMap type="com.example.domain.Delivery" id="BaseResultMap">
+        <result property="id" column="id"/>
+        <result property="code" column="code"/>
+        <result property="type" column="type"/>
+        <result property="selfCode" column="self_code"/>
+        <result property="vehicleNo" column="vehicle_no"/>
+        <result property="goodsId" column="goods_id"/>
+        <result property="goodsCode" column="goods_code"/>
+        <result property="status" column="status"/>
+        <result property="weightStatus" column="weight_status"/>
+        <result property="freight" column="freight"/>
+        <result property="goodsPrice" column="goods_price"/>
+        <result property="goodsAmount" column="goods_amount"/>
+        <result property="driverName" column="driver_name"/>
+        <result property="driverPhone" column="driver_phone"/>
+        <result property="supId" column="sup_id"/>
+        <result property="supName" column="sup_name"/>
+        <result property="carrierOrgId" column="carrier_org_id"/>
+        <result property="carrierOrgName" column="carrier_org_name"/>
+        <result property="isNetworkTransportation" column="is_network_transportation"/>
+        <result property="startProvinceId" column="start_province_id"/>
+        <result property="startProvinceName" column="start_province_name"/>
+        <result property="startCityId" column="start_city_id"/>
+        <result property="startCityName" column="start_city_name"/>
+        <result property="startCountryId" column="start_country_id"/>
+        <result property="startCountryName" column="start_country_name"/>
+        <result property="startStationId" column="start_station_id"/>
+        <result property="startStationName" column="start_station_name"/>
+        <result property="endProvinceId" column="end_province_id"/>
+        <result property="endProvinceName" column="end_province_name"/>
+        <result property="endCityId" column="end_city_id"/>
+        <result property="endCityName" column="end_city_name"/>
+        <result property="endCountryId" column="end_country_id"/>
+        <result property="endCountryName" column="end_country_name"/>
+        <result property="endStationId" column="end_station_id"/>
+        <result property="endStationName" column="end_station_name"/>
+        <result property="loadGrossWeight" column="load_gross_weight"/>
+        <result property="loadTareWeight" column="load_tare_weight"/>
+        <result property="loadNetWeight" column="load_net_weight"/>
+        <result property="unloadGrossWeight" column="unload_gross_weight"/>
+        <result property="unloadTareWeight" column="unload_tare_weight"/>
+        <result property="unloadNetWeight" column="unload_net_weight"/>
+        <result property="discountNetWeight" column="discount_net_weight"/>
+        <result property="loadTime" column="load_time"/>
+        <result property="unloadTime" column="unload_time"/>
+        <result property="loadGrossTime" column="load_gross_time"/>
+        <result property="loadTareTime" column="load_tare_time"/>
+        <result property="unloadGrossTime" column="unload_gross_time"/>
+        <result property="unloadTareTime" column="unload_tare_time"/>
+        <result property="goodsCategoryId" column="goods_category_id"/>
+        <result property="goodsCategoryName" column="goods_category_name"/>
+        <result property="goodsDetailId" column="goods_detail_id"/>
+        <result property="goodsDetailName" column="goods_detail_name"/>
+        <result property="isFieldAudit" column="is_field_audit"/>
+        <result property="fieldAuditUserId" column="field_audit_user_id"/>
+        <result property="fieldAuditUserName" column="field_audit_user_name"/>
+        <result property="fieldAuditTime" column="field_audit_time"/>
+        <result property="fieldAuditStatus" column="field_audit_status"/>
+        <result property="fieldId" column="field_id"/>
+        <result property="fieldName" column="field_name"/>
+        <result property="remarks" column="remarks"/>
+    </resultMap>
+
+    <select id="selectByPage" parameterType="com.example.domain.Delivery" resultMap="BaseResultMap">
+        select * from t_delivery
+        where is_delete = 0
+        <if test="vehicleNo != null and vehicleNo != ''">
+            and vehicle_no like concat('%',#{vehicleNo},'%')
+        </if>
+        <if test="type != null and type != ''">
+            and type = #{type}
+        </if>
+        <if test="weightStatus != null">
+            and weight_status = #{weightStatus}
+        </if>
+        <if test="isFieldAudit != null">
+            AND is_field_audit = #{isFieldAudit}
+        </if>
+        <if test="fieldAuditStatus != null">
+            AND field_audit_status = #{fieldAuditStatus}
+        </if>
+        <if test="fieldId != null and fieldId != ''">
+            AND field_id = #{fieldId}
+        </if>
+    </select>
+
+
+</mapper>
