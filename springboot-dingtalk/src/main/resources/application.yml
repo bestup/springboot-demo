@@ -1,0 +1,19 @@
+server:
+  port: 9091
+
+spring:
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    check-template-location: true
+    suffix: .html
+    mode: LEGACYHTML5
+    encoding: UTF-8
+
+#dingtalk
+dingtalk:
+  robot:
+    access-token: 3415290165a
+    secret:
+      secret-token: SEC4b9ee2d
+      secret-enabled: true
