@@ -1,0 +1,34 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver #驱动
+    url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1  #嵌入式数据库
+    schema: classpath:sql/init.sql #初始化表
+    data: classpath:sql/data.sql #初始化数据
+  h2:
+    console:
+      enabled: true
+      settings:
+        trace: true #开启console 访问默认false
+        web-allow-others: true #允许console 远程访问 默认false
+      path: /h2 #  h2 访问路径上下文
+#  thymeleaf:
+#    cache: false
+#    prefix: classpath:/templates/
+#    check-template-location: true
+#    suffix: .html
+#    mode: LEGACYHTML5
+#    encoding: UTF-8
+
+#mybatis:
+#  mapper-locations: classpath:mapper/*.xml
+
+#pagehelper:
+#  helperDialect: mysql
+#  reasonable: true
+#  supportMethodsArguments: true
+#  params: count= countSql
+
+logging:
+  level:
+    com:
+      hardware: debug
