@@ -4,6 +4,7 @@ spring:
     url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1  #嵌入式数据库
     schema: classpath:sql/init.sql #初始化表
     data: classpath:sql/data.sql #初始化数据
+    sql-script-encoding: utf-8
   h2:
     console:
       enabled: true
