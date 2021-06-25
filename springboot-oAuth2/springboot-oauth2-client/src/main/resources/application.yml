@@ -1,0 +1,11 @@
+server:
+  port: 9900
+
+spring:
+  thymeleaf:
+    cache: false #关闭缓存
+    prefix: classpath:/templates/ #添加路径前缀
+    check-template-location: true
+    suffix: .html
+    mode: LEGACYHTML5
+    encoding: UTF-8

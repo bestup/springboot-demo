@@ -1,0 +1,60 @@
+<!DOCTYPE>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <title>登录</title>
+
+    <!-- 引入样式文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.12/lib/index.css" />
+
+    <!-- 引入 Vue 和 Vant 的 JS 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vant@2.12/lib/vant.min.js"></script>
+
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <van-cell-group>
+        <van-field v-model="username" label="用户名" placeholder="请输入用户名" />
+    </van-cell-group>
+    <van-cell-group>
+        <van-field v-model="password" label="密码" placeholder="请输入密码" />
+    </van-cell-group>
+
+    <van-button type="primary" size="mini" @click="login">登录</van-button>
+    <van-button type="primary" size="mini" @click="wxlogin">微信登录</van-button>
+
+</div>
+</body>
+<script type="text/javascript">
+    Vue.use(vant.Form);
+    Vue.use(vant.Field);
+    Vue.use(vant.Button);
+    Vue.use(vant.Toast);
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                username: '',
+                password: '',
+            };
+        },
+        methods: {
+            login() {
+                this.$toast.success('请求本项目登录');
+            },
+
+            //请求第三方登录
+            wxlogin() {
+                window.location.href = "/wxLogin";
+            }
+        },
+    });
+</script>
+</html>
